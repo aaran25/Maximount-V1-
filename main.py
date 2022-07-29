@@ -8,6 +8,7 @@ negative_gravity = 3
 Screen_Dimensions = pygame.display.set_mode((1920 , 1080))
 skye = pygame.image.load("sky.webp")
 tileset = pygame.image.load("tileset.png")
+tree = pygame.image.load("Tree.png")
 surface_image2 = tileset.get_rect()
 surface_image = skye.get_rect()
 DEFAULT_IMAGE_SIZE = (552, 222)
@@ -16,6 +17,7 @@ spritesprite = pygame.image.load("sprite.png")
 sprite = spritesprite.get_rect()
 print (sprite)
 Normal_Sprite = pygame.transform.scale(spritesprite, (150, altitude))
+Scaled_Tree = pygame.transform.scale (tree, (200, 250))
 
 
 # TileX, TileY, cropX, cropY, cropWidth, cropHeight
@@ -35,7 +37,6 @@ def moving(x, y):
         return x, y
         # Jump
     if key[pygame.K_w]:
-        # y -= 70
 
         if jumped == False:
             jumped = True
@@ -67,6 +68,19 @@ def moving(x, y):
             return x, y+70
     #Standing still
     else:
+        if jumped == True:
+            # Finished w jump
+            if y == 420 and acceleration < 0:
+                jumped = False
+                acceleration = 6
+                return x, y
+
+            elif y < 421:
+                y = y - acceleration * 6
+                acceleration -= 1
+                print(y)
+                print(jumped)
+                return x, y
         if altitude == 80:
             altitude = altitude + 70
             Normal_Sprite = pygame.transform.scale(spritesprite, (150, altitude))
@@ -87,6 +101,7 @@ while True:
         sum1 += 50
         sum2 += 72
         Screen_Dimensions.blit(tileset, (0, 0))
+        Screen_Dimensions.blit(Scaled_Tree,(400,336))
     x, y = moving(x, y)
     Screen_Dimensions.blit(Normal_Sprite, (x, y))
 
