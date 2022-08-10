@@ -9,6 +9,8 @@ Screen_Dimensions = pygame.display.set_mode((1920 , 1080))
 skye = pygame.image.load("sky.webp")
 tileset = pygame.image.load("tileset.png")
 tree = pygame.image.load("Tree.png")
+mars = pygame.image.load("mars.png")
+
 surface_image2 = tileset.get_rect()
 surface_image = skye.get_rect()
 DEFAULT_IMAGE_SIZE = (552, 222)
@@ -89,10 +91,22 @@ def moving(x, y):
             return x, y
 x = 850
 y = 420
+angle = 0
 while True:
+
     sum1 = 0
     sum2 = 0
+    rotating_mars = pygame.transform.rotate(mars, angle)
+    angle += 20
+
+    if angle == 360:
+        angle = 0
+
+    print(angle)
+
+
     Screen_Dimensions.blit(skye, surface_image)
+    Screen_Dimensions.blit(rotating_mars, (400, 100))
     for i in range(80):
         Screen_Dimensions.blit(Scaled_Tileset, (sum1, Cropped_griddle[1]),
             (Cropped_griddle[2], Cropped_griddle[3], Cropped_griddle[4], Cropped_griddle[5]))
@@ -101,7 +115,7 @@ while True:
         sum1 += 50
         sum2 += 72
         Screen_Dimensions.blit(tileset, (0, 0))
-        Screen_Dimensions.blit(Scaled_Tree,(400,336))
+    Screen_Dimensions.blit(Scaled_Tree, (400, 336))
     x, y = moving(x, y)
     Screen_Dimensions.blit(Normal_Sprite, (x, y))
 
