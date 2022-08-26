@@ -10,6 +10,9 @@ skye = pygame.image.load("sky.webp")
 tileset = pygame.image.load("tileset.png")
 tree = pygame.image.load("Tree.png")
 mars = pygame.image.load("mars.png")
+spritesheet = pygame.image.load("spritesheet.png")
+Scaled_SpriteSheet = pygame.transform.scale(spritesheet, (900,900))
+
 
 surface_image2 = tileset.get_rect()
 surface_image = skye.get_rect()
@@ -26,6 +29,11 @@ Scaled_Tree = pygame.transform.scale (tree, (200, 250))
 Cropped_griddle = [1000, 541, 30, 0, 50, 45]
 sum = 1000
 Cropped_Dirtle = [200, 582, 20, 150, 100, 349]
+
+Run_Sprite = [200, 100, 151, 510, 57, 75]
+
+#57 is the gap between each sprite frame
+
 
 
 def moving(x, y):
@@ -97,8 +105,15 @@ while True:
     sum1 = 0
     sum2 = 0
     rotating_mars = pygame.transform.rotate(mars, angle)
-    angle += 20
+    angle += 0.06
+    coordinate = (400,100)
 
+    #mars.get_rect(topleft=coordinate).center)
+    #new_rect = rotating_mars.get_rect.center
+
+
+    #Screen_Dimensions.blit(rotated_image, new_rect)new_rect = rotated_image.get_rect(center = image.get_rect(topleft = topleft).center)
+    #Screen_Dimensions.blit(rotating_mars, new_rect)
     if angle == 360:
         angle = 0
 
@@ -106,7 +121,13 @@ while True:
 
 
     Screen_Dimensions.blit(skye, surface_image)
+
     Screen_Dimensions.blit(rotating_mars, (400, 100))
+    Screen_Dimensions.blit(Scaled_SpriteSheet, (600, 300))
+    Screen_Dimensions.blit(Scaled_SpriteSheet, (Run_Sprite[0] , Run_Sprite[1]),
+        (Run_Sprite[2], Run_Sprite[3], Run_Sprite[4], Run_Sprite[5]))
+
+
     for i in range(80):
         Screen_Dimensions.blit(Scaled_Tileset, (sum1, Cropped_griddle[1]),
             (Cropped_griddle[2], Cropped_griddle[3], Cropped_griddle[4], Cropped_griddle[5]))
