@@ -32,7 +32,8 @@ Cropped_Dirtle = [200, 582, 20, 150, 100, 349]
 
 Run_Sprite = [200, 100, 36, 510, 100, 75]
 
-Crouch_Frame = [200, 100, 36, 510, 100, 20]
+Crouch_Frame = [220, 585, 57, 75]
+
 
 
 
@@ -119,6 +120,8 @@ def moving(x, y):
             #Normal_Sprite = pygame.transform.scale(spritesprite, (150, altitude))
             return x, y-70
         else:
+            Screen_Dimensions.blit(Scaled_SpriteSheet, (x, y),
+                (Crouch_Frame[0], Crouch_Frame[1], Crouch_Frame[2], Crouch_Frame[3]))
             return x, y
 x = 850
 y = 510
@@ -146,14 +149,12 @@ while True:
     Screen_Dimensions.blit(skye, surface_image)
 
     Screen_Dimensions.blit(rotating_mars, (400, 100))
-    Screen_Dimensions.blit(spritesheet, (400, 200))
+    Screen_Dimensions.blit(Scaled_SpriteSheet, (400, 200))
 
     if Current_Frame != 6:
         Current_Frame += 1
     else:
         Current_Frame = 0
-
-
 
     for i in range(80):
         Screen_Dimensions.blit(Scaled_Tileset, (sum1, Cropped_griddle[1]),
@@ -166,7 +167,7 @@ while True:
     Screen_Dimensions.blit(Scaled_Tree, (400, 336))
     x, y = moving(x, y)
     Screen_Dimensions.blit(Scaled_SpriteSheet, (x, y),
-    (Crouch_Frame[0], Crouch_Frame[1], Crouch_Frame[2],Frames[Current_Frame][3]))
+    (Crouch_Frame[0], Crouch_Frame[1], Crouch_Frame[2],Crouch_Frame[3]))
 
     pygame.display.update()
     for event in pygame.event.get():
